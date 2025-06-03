@@ -5,7 +5,7 @@ import mplfinance as mpf
 from scipy.signal import find_peaks
 from src.analysis.technical import find_most_separated_pair
 
-def plot_with_levels_and_trend(df: pd.DataFrame, levels: pd.DataFrame):
+def plot_with_levels_and_trend(df: pd.DataFrame, levels: pd.DataFrame, save_path: str = None, show_plot: bool = False):
     fig, ax = plt.subplots(figsize=(14, 8))
     df['Date'] = df.index
     df.reset_index(drop=True, inplace=True)
@@ -34,7 +34,15 @@ def plot_with_levels_and_trend(df: pd.DataFrame, levels: pd.DataFrame):
     fig.autofmt_xdate()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()
+    
+    # Save the plot if save_path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    
+    if show_plot:
+        plt.show()
+    else:
+        plt.close()
 
 def _plot_trend_lines(ax, df, l1, l2, h1, h2):
     if l1 is not None:

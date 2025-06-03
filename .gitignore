@@ -1,2 +1,4 @@
 /AAPL_data.csv
 /demo.py
+.env
+/__pycache__/
